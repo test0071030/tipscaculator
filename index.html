@@ -119,11 +119,11 @@
     </div>
     <div class="input-group">
       <label for="employees">Number of Employees:</label>
-      <input type="number" id="employees" min="2" max="8" value="2">
+      <input type="number" id="employees" min="2" max="8" value="3" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="hours">Hours Worked by Each Employee (comma-separated):</label>
-      <input type="text" id="hours" placeholder="Example: 3,9,5">
+      <input type="text" id="hours" placeholder="Example: 3,9,5" inputmode="numeric" onkeydown="handleEnterKey(event)">
     </div>
     <button onclick="calculateTip()">Calculate Tips</button>
     <div id="total"></div>
@@ -176,6 +176,19 @@
         var employeeNumber = 'Employee ' + (j + 1);
         var tipAmount = tips[j];
         resultsElement.innerHTML += employeeNumber + ': ' + tipAmount + ' Euro<br>';
+      }
+    }
+    
+    function handleEnterKey(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const inputs = Array.from(document.querySelectorAll("input"));
+        const currentIndex = inputs.indexOf(event.target);
+        const nextIndex = currentIndex + 1;
+
+        if (nextIndex < inputs.length) {
+          inputs[nextIndex].focus();
+        }
       }
     }
   </script>
