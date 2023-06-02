@@ -55,7 +55,7 @@
     <label for="employees">Number of Employees:</label>
     <input type="number" id="employees" min="2" max="8">
     <label for="hours">Hours Worked by Each Employee (comma-separated):</label>
-    <input type="text" id="hours" placeholder="Example: 3,9,5">
+    <input type="text" id="hours" placeholder="Example: 3.5,4.5">
     <button onclick="calculateTip()">Calculate Tips</button>
     <div id="result"></div>
   </div>
@@ -73,10 +73,10 @@
       }
 
       var tips = [];
-      var totalHours = hours.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+      var totalHours = hours.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
 
       for (var i = 0; i < employees; i++) {
-        var tip = (total * (parseInt(hours[i]) / totalHours)).toFixed(2);
+        var tip = (total * (parseFloat(hours[i]) / totalHours)).toFixed(2);
         tips.push(tip);
       }
 
