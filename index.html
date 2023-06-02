@@ -67,63 +67,63 @@
     <h2>Tip Calculator</h2>
     <div class="input-group">
       <label for="100">100 Euro:</label>
-      <input type="number" id="100" min="0" value="0">
+      <input type="number" id="100" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="50">50 Euro:</label>
-      <input type="number" id="50" min="0" value="0">
+      <input type="number" id="50" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="20">20 Euro:</label>
-      <input type="number" id="20" min="0" value="0">
+      <input type="number" id="20" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="10">10 Euro:</label>
-      <input type="number" id="10" min="0" value="0">
+      <input type="number" id="10" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="5">5 Euro:</label>
-      <input type="number" id="5" min="0" value="0">
+      <input type="number" id="5" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="2">2 Euro:</label>
-      <input type="number" id="2" min="0" value="0">
+      <input type="number" id="2" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="1">1 Euro:</label>
-      <input type="number" id="1" min="0" value="0">
+      <input type="number" id="1" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="50cents">50 Cents:</label>
-      <input type="number" id="50cents" min="0" value="0">
+      <input type="number" id="50cents" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="20cents">20 Cents:</label>
-      <input type="number" id="20cents" min="0" value="0">
+      <input type="number" id="20cents" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="10cents">10 Cents:</label>
-      <input type="number" id="10cents" min="0" value="0">
+      <input type="number" id="10cents" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="5cents">5 Cents:</label>
-      <input type="number" id="5cents" min="0" value="0">
+      <input type="number" id="5cents" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="2cents">2 Cents:</label>
-      <input type="number" id="2cents" min="0" value="0">
+      <input type="number" id="2cents" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="1cent">1 Cent:</label>
-      <input type="number" id="1cent" min="0" value="0">
+      <input type="number" id="1cent" min="0" value="0" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="employees">Number of Employees:</label>
-      <input type="number" id="employees" min="2" max="8" value="3" inputmode="numeric">
+      <input type="number" id="employees" min="2" max="8" value="2" inputmode="numeric">
     </div>
     <div class="input-group">
       <label for="hours">Hours Worked by Each Employee (comma-separated):</label>
-      <input type="text" id="hours" placeholder="Example: 3,9,5" inputmode="numeric" onkeydown="handleEnterKey(event)">
+      <input type="text" id="hours" placeholder="Example: 3,9,5">
     </div>
     <button onclick="calculateTip()">Calculate Tips</button>
     <div id="total"></div>
@@ -154,15 +154,21 @@
         return;
       }
 
-      var totalPayment = (euros100 * 100) + (euros50 * 50) + (euros20 * 20) + (euros10 * 10) + (euros5 * 5) +
-        (euros2 * 2) + (euros1 * 1) + (cents50 * 0.5) + (cents20 * 0.2) + (cents10 * 0.1) + (cents5 * 0.05) +
-        (cents2 * 0.02) + (cents1 * 0.01);
+      var totalPayment = (euros100 * 100 + euros50 * 50 + euros20 * 20 + euros10 * 10 + euros5 * 5 + euros2 * 2 +
+        euros1 * 1 + cents50 * 0.50 + cents20 * 0.20 + cents10 * 0.10 + cents5 * 0.05 + cents2 * 0.02 + cents1 * 0.01);
+
       var tips = [];
-      var totalHours = hours.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
+      var totalHours = 0;
 
       for (var i = 0; i < employees; i++) {
-        var tip = (totalPayment * (parseFloat(hours[i]) / totalHours)).toFixed(2);
-        tips.push(tip);
+        var hour = parseFloat(hours[i]);
+        totalHours += hour;
+      }
+
+      for (var j = 0; j < employees; j++) {
+        var hour = parseFloat(hours[j]);
+        var tipAmount = (hour / totalHours) * totalPayment;
+        tips.push(tipAmount.toFixed(2));
       }
 
       var totalElement = document.getElementById('total');
@@ -176,19 +182,6 @@
         var employeeNumber = 'Employee ' + (j + 1);
         var tipAmount = tips[j];
         resultsElement.innerHTML += employeeNumber + ': ' + tipAmount + ' Euro<br>';
-      }
-    }
-    
-    function handleEnterKey(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        const inputs = Array.from(document.querySelectorAll("input"));
-        const currentIndex = inputs.indexOf(event.target);
-        const nextIndex = currentIndex + 1;
-
-        if (nextIndex < inputs.length) {
-          inputs[nextIndex].focus();
-        }
       }
     }
   </script>
