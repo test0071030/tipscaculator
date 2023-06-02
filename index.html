@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>小費計算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>小費計算器</h2>
+    <label for="total">總小費金額（歐元）:</label>
+    <input type="number" id="total" min="0" step="0.01">
+    <label for="employees">員工人數:</label>
+    <input type="number" id="employees" min="2" max="8">
+    <label for="hours">每個員工的工作時數（以逗號分隔）:</label>
+    <input type="text" id="hours" placeholder="例如：3,9,5">
+    <button onclick="calculateTip()">計算小費</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateTip() {
+      var total = parseFloat(document.getElementById('total').value);
+      var employees = parseInt(document.getElementById('employees').value);
+      var hoursInput = document.getElementById('hours').value;
+      var hours = hoursInput.split(',');
+
+      if (hours.length !== employees) {
+        alert('輸入的員工時數數量與員工人數不符！');
+        return;
+      }
+
+      var tips = [];
+      var totalHours = hours.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+
+      for (var i = 0; i < employees; i++) {
+        var tip = (total * (parseInt(hours[i]) / totalHours)).toFixed(2);
+        tips.push(tip);
+      }
+
+      var resultElement = document.getElementById('result');
+      resultElement.innerHTML = '';
+
+      for (var j = 0; j < employees; j++) {
+        var employeeNumber = j + 1;
+        var tipAmount = tips[j];
+        resultElement.innerHTML += '員工 ' + employeeNumber + ': ' + tipAmount + ' 歐元<br>';
+      }
+    }
+  </script>
+</body>
+</html>
