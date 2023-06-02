@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>小費計算器</title>
+  <title>Tip Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -49,14 +49,14 @@
 </head>
 <body>
   <div class="container">
-    <h2>小費計算器</h2>
-    <label for="total">總小費金額（歐元）:</label>
+    <h2>Tip Calculator</h2>
+    <label for="total">Total Tip Amount (Euro):</label>
     <input type="number" id="total" min="0" step="0.01">
-    <label for="employees">員工人數:</label>
+    <label for="employees">Number of Employees:</label>
     <input type="number" id="employees" min="2" max="8">
-    <label for="hours">每個員工的工作時數（以逗號分隔）:</label>
-    <input type="text" id="hours" placeholder="例如：3,9,5">
-    <button onclick="calculateTip()">計算小費</button>
+    <label for="hours">Hours Worked by Each Employee (comma-separated):</label>
+    <input type="text" id="hours" placeholder="Example: 3,9,5">
+    <button onclick="calculateTip()">Calculate Tips</button>
     <div id="result"></div>
   </div>
 
@@ -68,7 +68,7 @@
       var hours = hoursInput.split(',');
 
       if (hours.length !== employees) {
-        alert('輸入的員工時數數量與員工人數不符！');
+        alert('The number of hours entered does not match the number of employees!');
         return;
       }
 
@@ -86,7 +86,7 @@
       for (var j = 0; j < employees; j++) {
         var employeeNumber = j + 1;
         var tipAmount = tips[j];
-        resultElement.innerHTML += '員工 ' + employeeNumber + ': ' + tipAmount + ' 歐元<br>';
+        resultElement.innerHTML += 'Employee ' + employeeNumber + ': ' + tipAmount + ' Euro<br>';
       }
     }
   </script>
