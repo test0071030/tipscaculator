@@ -55,7 +55,7 @@ function calculateTip() {
       var tipAmount = parseFloat(tips[j]);
   
       if (hours[j] >= 6) {
-        employeeNumber += ', adjusted due to 0.5 hour break time';
+        employeeNumber += ', has break time';
       }
   
       employeeNumber += ')';
