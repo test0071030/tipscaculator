@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Tip Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type=""text/javascript" src="cal.js"></script>
-  <link href="style.css" rel=stylesheet type="text/css" >
+  <script type="" text/javascript" src="cal.js"></script>
+  <link href="style.css" rel=stylesheet type="text/css">
 </head>
+
 <body>
   <div class="container">
     <h2>Tip Calculator</h2>
@@ -61,17 +63,38 @@
       <label for="1cent">1 Cent:</label>
       <input type="number" id="1cent" min="0" value="0" inputmode="numeric" class="ammount-imput">
     </div>
+    <div class="preset-buttons">
+      <button onclick="fillHours('8,10,7.5'); toggleCollapse('info1')">Düs Hbf Mon-Thu</button>
+      <div id="info1" class="collapse-info">10:30-18:30、11:30-21:30、14:00-21:30</div>
+
+      <button onclick="fillHours('8,10,7.5,5'); toggleCollapse('info2')">Düs Hbf Fri</button>
+      <div id="info2" class="collapse-info">10:30-18:30、11:30-21:30、14:00-21:30、16:30-21:30</div>
+
+      <button onclick="fillHours('8,10,8.5,7.5'); toggleCollapse('info3')">Düs Hbf Sat</button>
+      <div id="info3" class="collapse-info">10:30-18:30、11:30-21:30、13:00-21:30、14:00-21:30</div>
+
+      <button onclick="fillHours('8,10,7.5,5'); toggleCollapse('info4')">Düs Hbf Sun</button>
+      <div id="info4" class="collapse-info">10:30-18:30、11:30-21:30、14:00-21:30、14:30-21:30</div>
+
+      <button onclick="fillHours('8,9,5.5'); toggleCollapse('info5')">Neuss Mon-Fri</button>
+      <div id="info5" class="collapse-info">10:00-18:00、11:00-20:00、14:30-20:00</div>
+
+      <button onclick="fillHours('8,9,8.5,7'); toggleCollapse('info6')">Neuss Sat</button>
+      <div id="info6" class="collapse-info">10:00-18:00、11:00-20:00、11:30-20:00、13:00-20:00</div>
+    </div>
     <div class="input-group">
       <label for="hours">Hours Worked by Each Employee (comma-separated):</label>
       <input type="text" id="hours" placeholder="Example: 3,9,5">
     </div>
-    <div class="input-group"><b>Hint: You don't need to minus the break time, this website will calculate break time automatically</b></div>
+    <div class="input-group"><b>Hint: You don't need to minus the break time, this website will calculate break time
+        automatically</b></div>
     <div class="input-group">Example: if A works 10:00~18:00, please input 8, not 7.5.</div>
     <button onclick="calculateTip()">Calculate Tips</button>
     <div id="total"></div>
     <div id="results"></div>
   </div>
 
-  
+
 </body>
+
 </html>
