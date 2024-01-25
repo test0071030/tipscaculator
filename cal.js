@@ -102,12 +102,3 @@ function calculateTip() {
 function fillHours(hoursString) {
   document.getElementById('hours').value = hoursString;
 }
-
-function toggleCollapse(elementId) {
-  var element = document.getElementById(elementId);
-  if (element.style.display === "block") {
-    element.style.display = "none";
-  } else {
-    element.style.display = "block";
-  }
-}
